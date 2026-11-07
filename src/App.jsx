@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import './App.css'
 import TaskList from './components/TaskList'
 import NewTaskForm from './components/NewTaskForm'
@@ -6,7 +7,7 @@ import Footer from './components/Footer'
 
 function App() {
 
-  const tasks = [
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       description: "Text 1",
@@ -16,7 +17,7 @@ function App() {
     {
       id: 2,
       description: "Text 2",
-      completed: false,
+      completed: true,
       created: new Date()
     },
     {
@@ -25,8 +26,21 @@ function App() {
       completed: false,
       created: new Date()
     },
-  ]
-  
+  ])
+
+  function toggleTask (id) {
+    
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return {
+          ...task,
+          completed : !task.completed
+        };
+      }
+      return task;
+    })
+    setTasks(updatedTasks)
+  }
 
   return (
     <>
@@ -37,8 +51,10 @@ function App() {
         </header>
       <section className="main">
         <ul className="todo-list">
-          <TaskList tasks={tasks}/>
-          <li className="editing">
+          <TaskList tasks={tasks}
+            toggleTask={toggleTask}
+            />
+          {/* <li className="editing">
             <div className="view">
               <input className="toggle"
               type="checkbox" />
@@ -52,7 +68,7 @@ function App() {
               <input type="text"
               className="edit"
               value="Editing task" />
-            </li>
+            </li> */}
           </ul>
           <Footer />
           

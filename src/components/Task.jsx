@@ -1,10 +1,13 @@
-function Task({task}) {
+function Task({task, toggleTask}) {
     return (
-        <li className="completed">
+        <li className={task.completed === true ? "completed" : ""}>
             <div className="view">
                 <input
                     className="toggle"
-                    type="checkbox" />
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={() => {toggleTask(task.id)}} 
+                />
                 <label>
                     <span className="description">{task.description}</span>
                     <span className="created">created 17 seconds ago</span>

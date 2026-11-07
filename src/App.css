@@ -176,6 +176,7 @@ body {
 
 .todo-list li.editing .view {
   display: none;
+  position: relative;
 }
 
 .todo-list li .toggle {
@@ -184,6 +185,7 @@ body {
   /* auto, since non-WebKit browsers doesn't support input styling */
   height: auto;
   position: absolute;
+  left: 0;
   top: 0;
   bottom: 0;
   margin: auto 0;
