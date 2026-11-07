@@ -1,12 +1,13 @@
 import Task from './Task'
-function TaskList({tasks, toggleTask}) {
+function TaskList({ tasks, toggleTask, deleteTask }) {
     return (
         tasks.map((task) => {
-           return <Task
-            task = {task}
-            key = {task.id}
-            toggleTask = {toggleTask}
-           />
+            return <Task
+                task={task}
+                key={task.id}
+                toggleTask={toggleTask}
+                deleteTask={deleteTask}
+            />
         })
     );
 }

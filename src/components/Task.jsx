@@ -1,4 +1,4 @@
-function Task({task, toggleTask}) {
+function Task({task, toggleTask, deleteTask}) {
     return (
         <li className={task.completed === true ? "completed" : ""}>
             <div className="view">
@@ -13,7 +13,7 @@ function Task({task, toggleTask}) {
                     <span className="created">created 17 seconds ago</span>
                 </label>
                 <button className="icon icon-edit"></button>
-                <button className="icon icon-destroy"></button>
+                <button className="icon icon-destroy" onClick={() => {deleteTask(task.id)}}></button>
             </div>
         </li>
     );

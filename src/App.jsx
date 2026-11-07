@@ -28,18 +28,24 @@ function App() {
     },
   ])
 
-  function toggleTask (id) {
-    
+  function toggleTask(id) {
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
         return {
           ...task,
-          completed : !task.completed
+          completed: !task.completed
         };
       }
       return task;
     })
     setTasks(updatedTasks)
+  }
+
+  function deleteTask(id) {
+    const updatedTaskList = tasks.filter((task) => {
+      return (task.id !== id)
+    })
+    setTasks(updatedTaskList)
   }
 
   return (
@@ -49,12 +55,13 @@ function App() {
           <h1>todos</h1>
           <NewTaskForm />
         </header>
-      <section className="main">
-        <ul className="todo-list">
-          <TaskList tasks={tasks}
-            toggleTask={toggleTask}
+        <section className="main">
+          <ul className="todo-list">
+            <TaskList tasks={tasks}
+              toggleTask={toggleTask}
+              deleteTask={deleteTask}
             />
-          {/* <li className="editing">
+            {/* <li className="editing">
             <div className="view">
               <input className="toggle"
               type="checkbox" />
@@ -71,10 +78,10 @@ function App() {
             </li> */}
           </ul>
           <Footer />
-          
+
         </section>
       </section>
-  </>
+    </>
   )
 }
 
