@@ -29,7 +29,7 @@ function App() {
   ])
 
   function toggleTask(id) {
-    const updatedTasks = tasks.map((task) => {
+    const updatedTask = tasks.map((task) => {
       if (task.id === id) {
         return {
           ...task,
@@ -38,7 +38,7 @@ function App() {
       }
       return task;
     })
-    setTasks(updatedTasks)
+    setTasks(updatedTask)
   }
 
   function deleteTask(id) {
@@ -46,6 +46,20 @@ function App() {
       return (task.id !== id)
     })
     setTasks(updatedTaskList)
+  }
+
+  function updateTask(id, newDescription) {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return {
+          ...task,
+          description: newDescription
+        }
+
+      }
+      return task;
+    })
+    setTasks(updatedTasks)
   }
 
   return (
@@ -60,6 +74,7 @@ function App() {
             <TaskList tasks={tasks}
               toggleTask={toggleTask}
               deleteTask={deleteTask}
+              updateTask={updateTask}
             />
             {/* <li className="editing">
             <div className="view">
