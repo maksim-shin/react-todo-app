@@ -6,7 +6,7 @@ import NewTaskForm from './components/NewTaskForm'
 import Footer from './components/Footer'
 
 function App() {
-
+  
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -27,6 +27,8 @@ function App() {
       created: new Date()
     },
   ])
+
+  const [filter, setFilter] = useState("all")
 
   function toggleTask(id) {
     const updatedTask = tasks.map((task) => {
@@ -62,6 +64,18 @@ function App() {
     setTasks(updatedTasks)
   }
 
+      function filterTasks(tasks) {
+        if (filter === "all") {
+          return tasks
+        } else if (filter === "active") {
+          return tasks.filter((task) => {
+            return task.completed === false}) 
+        }else if (filter === "completed") {
+          return tasks.filter((task) => {
+            return task.completed === true}) 
+        }
+      }
+
   return (
     <>
       <section className="todoapp">
@@ -70,29 +84,17 @@ function App() {
           <NewTaskForm />
         </header>
         <section className="main">
-          <ul className="todo-list">
-            <TaskList tasks={tasks}
-              toggleTask={toggleTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-            />
-            {/* <li className="editing">
-            <div className="view">
-              <input className="toggle"
-              type="checkbox" />
-              <label>
-                <span className="description">Editing task</span>
-                <span className="created">created 5 minutes ago</span>
-              </label>
-              <button className="icon icon-edit"></button>
-              <button className="icon icon-destroy"></button>
-            </div>
-              <input type="text"
-              className="edit"
-              value="Editing task" />
-            </li> */}
-          </ul>
-          <Footer />
+
+          <TaskList tasks={tasks}
+            toggleTask={toggleTask}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+          />
+
+          <Footer tasks={tasks}
+            filter={filter} 
+            setFilter={setFilter}
+          />
 
         </section>
       </section>
