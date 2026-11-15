@@ -1,10 +1,12 @@
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+
 
 function Task({ task, toggleTask, deleteTask, updateTask }) {
 
     const [editing, setEditing] = useState(false);
     const [description, setDescription] = useState(task.description);
+    const inputRef = useRef("null");
 
     function handleKeyDown(event) {
         if (event.type === "keydown" && event.key === "Enter") {
@@ -18,6 +20,14 @@ function Task({ task, toggleTask, deleteTask, updateTask }) {
             setEditing(false)
         }
     }
+    
+    useEffect(() => {
+      if(editing) {
+        inputRef.current.focus()
+      }
+    }, [editing])
+    
+
 
     return (
        
@@ -36,7 +46,9 @@ function Task({ task, toggleTask, deleteTask, updateTask }) {
                     <button onClick={() => { setEditing(true) }} className="icon icon-edit"></button>
                     <button className="icon icon-destroy" onClick={() => { deleteTask(task.id) }}></button>
                 </div>
-                <input type="text"
+                <input 
+                    ref={inputRef}
+                    type="text"
                     className="edit"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}

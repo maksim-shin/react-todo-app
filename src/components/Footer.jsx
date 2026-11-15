@@ -1,9 +1,9 @@
 import TasksFilter from "./TasksFilter"
 
-function Footer({ filter, setFilter, deleteCompleted }) {
+function Footer({ filter, setFilter, deleteCompleted, countActive }) {
     return (
         <footer className="footer">
-            <span className="todo-count">1 items left</span>
+            <span className="todo-count">{countActive()} items left</span>
             <TasksFilter
                 filter={filter}
                 setFilter={setFilter}

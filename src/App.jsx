@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './App.css'
 import TaskList from './components/TaskList'
 import NewTaskForm from './components/NewTaskForm'
@@ -27,6 +27,9 @@ function App() {
       created: new Date()
     },
   ])
+
+  
+
 
   const [filter, setFilter] = useState("all")
 
@@ -83,6 +86,11 @@ function App() {
     setTasks(updatedTasks)
   }
 
+  function countActive() {
+    const countActiveTasks = (tasks.filter((task) => task.completed === false)).length
+    return countActiveTasks;
+  }
+
   return (
     <>
       <section className="todoapp">
@@ -103,6 +111,7 @@ function App() {
             filter={filter}
             setFilter={setFilter}
             deleteCompleted={deleteCompleted}
+            countActive={countActive}
           />
 
         </section>
