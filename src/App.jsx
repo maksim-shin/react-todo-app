@@ -6,7 +6,7 @@ import NewTaskForm from './components/NewTaskForm'
 import Footer from './components/Footer'
 
 function App() {
-  
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -64,17 +64,24 @@ function App() {
     setTasks(updatedTasks)
   }
 
-      function filterTasks(tasks) {
-        if (filter === "all") {
-          return tasks
-        } else if (filter === "active") {
-          return tasks.filter((task) => {
-            return task.completed === false}) 
-        }else if (filter === "completed") {
-          return tasks.filter((task) => {
-            return task.completed === true}) 
-        }
-      }
+  function filterTasks(tasks) {
+    if (filter === "all") {
+      return tasks
+    } else if (filter === "active") {
+      return tasks.filter((task) => {
+        return task.completed === false
+      })
+    } else if (filter === "completed") {
+      return tasks.filter((task) => {
+        return task.completed === true
+      })
+    }
+  }
+
+  function deleteCompleted() {
+    const updatedTasks = tasks.filter((task) => task.completed === false)
+    setTasks(updatedTasks)
+  }
 
   return (
     <>
@@ -85,15 +92,17 @@ function App() {
         </header>
         <section className="main">
 
-          <TaskList tasks={tasks}
+          <TaskList
+            tasks={filterTasks(tasks)}
             toggleTask={toggleTask}
             deleteTask={deleteTask}
             updateTask={updateTask}
           />
 
           <Footer tasks={tasks}
-            filter={filter} 
+            filter={filter}
             setFilter={setFilter}
+            deleteCompleted={deleteCompleted}
           />
 
         </section>

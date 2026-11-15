@@ -1,5 +1,5 @@
 import Task from './Task'
-function TaskList({ tasks, toggleTask, deleteTask, updateTask, filter }) {
+function TaskList({ tasks, toggleTask, deleteTask, updateTask}) {
     return (
         <ul className="todo-list">
             {tasks.map((task) => {
@@ -10,7 +10,6 @@ function TaskList({ tasks, toggleTask, deleteTask, updateTask, filter }) {
                         toggleTask={toggleTask}
                         deleteTask={deleteTask}
                         updateTask={updateTask}
-                        filter={filter}
                     />
                 )
             })}
