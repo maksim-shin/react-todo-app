@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from "react";
-
+import { formatDistanceToNow } from "date-fns";
 
 function Task({ task, toggleTask, deleteTask, updateTask }) {
 
@@ -41,7 +41,7 @@ function Task({ task, toggleTask, deleteTask, updateTask }) {
                     />
                     <label>
                         <span className="description">{task.description}</span>
-                        <span className="created">created 17 seconds ago</span>
+                        <span className="created">created {formatDistanceToNow(task.created)} ago</span>
                     </label>
                     <button onClick={() => { setEditing(true) }} className="icon icon-edit"></button>
                     <button className="icon icon-destroy" onClick={() => { deleteTask(task.id) }}></button>

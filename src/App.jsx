@@ -91,12 +91,26 @@ function App() {
     return countActiveTasks;
   }
 
+  function addTask(description) {
+    const newTask = {
+      id: Date.now(),
+      description: description,
+      completed: false,
+      created: new Date,
+    }
+    console.log(newTask);
+    
+    setTasks([...tasks,newTask])
+  }
+
   return (
     <>
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <NewTaskForm />
+          <NewTaskForm 
+            addTask={addTask}
+          />
         </header>
         <section className="main">
 
