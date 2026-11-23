@@ -7,30 +7,22 @@ import Footer from './components/Footer'
 
 function App() {
 
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      description: "Text 1",
-      completed: true,
-      created: new Date()
-    },
-    {
-      id: 2,
-      description: "Text 2",
-      completed: true,
-      created: new Date()
-    },
-    {
-      id: 3,
-      description: "Text 3",
-      completed: false,
-      created: new Date()
-    },
-  ])
-
+  const [tasks, setTasks] = useState([])
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(data => {
+        const tasksArr = data.map((task) => {
+          return {
+            ...task,
+            description: task.title,
+            created: new Date()
+          }
+        })
+        setTasks(tasksArr)
+      })
+  }, [])
   
-
-
   const [filter, setFilter] = useState("all")
 
   function toggleTask(id) {
